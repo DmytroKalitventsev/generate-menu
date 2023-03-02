@@ -1,58 +1,53 @@
 let doc = document;
 
+let nav = {
+	className: 'menu',
+	tag: 'nav',
+};
+let menu = {
+	className: 'menu-list',
+	tag: 'ul',
+};
+let menuItems = [
+	{ tag: 'li', title: 'Home', className: 'menu-item', classMod: 'menu-item_name' },
+	{ tag: 'li', title: 'About', className: 'menu-item', classMod: 'menu-item_about' },
+	{ tag: 'li', title: 'Blog', className: 'menu-item', classMod: 'menu-item_blog' },
+	{ tag: 'li', title: 'Contacts', className: 'menu-item', classMod: 'menu-item_contacts' },
+];
+
 generateMenu('.header');
 
 function generateMenu(parentSelector) {
-	renderNav(parentSelector);
-	renderMenuList('.menu');
-	renderMenuItems('.menu-list');
+	renderNav(nav, parentSelector);
+	renderMenu(menu, nav.className);
+	renderMenuItems(menuItems, menu.className);
 }
 
-function renderNav(parentSelector) {
-	let nav = {
-		className: 'menu',
-		tag: 'nav',
-	};
-
-	let tagBody = doc.querySelector(parentSelector);
-
+function renderNav(navObj, parentSelector) {
+	let selectorHtml = doc.querySelector(parentSelector);
 	let navHtml = '';
 
-	navHtml += `<${nav.tag} class="${nav.className}"></%}>`;
+	navHtml += `<${navObj.tag} class="${navObj.className}"></${navObj.tag}}>`;
 
-	tagBody.innerHTML = navHtml;
+	selectorHtml.innerHTML += navHtml;
 }
 
-function renderMenuList(parentSelector) {
-	let menu = {
-		className: 'menu-list',
-		tag: 'ul',
-	}
-
-	let tagNav = doc.querySelector(parentSelector);
-
+function renderMenu(menuObj, navClassName) {
+	let classNav = doc.querySelector(`.${navClassName}`);
 	let menuListHtml = '';
 
-	menuListHtml += `<${menu.tag} class="${menu.className}"></%}>`;
+	menuListHtml += `<${menuObj.tag} class="${menuObj.className}"></${menuObj.tag}}>`;
 
-	tagNav.innerHTML = menuListHtml;
+	classNav.innerHTML += menuListHtml;
 }
 
-function renderMenuItems(parentSelector) {
-	let menuItems = [
-		{ tag: 'li', title: 'Home', className: 'menu-item', classMod: 'menu-item_name' },
-		{ tag: 'li', title: 'About', className: 'menu-item', classMod: 'menu-item_about' },
-		{ tag: 'li', title: 'Blog', className: 'menu-item', classMod: 'menu-item_blog' },
-		{ tag: 'li', title: 'Contacts', className: 'menu-item', classMod: 'menu-item_contacts' },
-	];
+function renderMenuItems(menuItemsObj, menuClassName) {
+	let classMenu = doc.querySelector(`.${menuClassName}`);
+	let menuItemsHtml = '';
 
-	let menuItem = doc.querySelector(parentSelector);
-
-	let menuItemHtml = '';
-
-	for (let key in menuItems) {
-		menuItemHtml += `<${menuItems[key].tag} class="${menuItems[key].className} ${menuItems[key].classMod}">${menuItems[key].title}</%>`;
+	for (let key in menuItemsObj) {
+		menuItemsHtml += `<${menuItemsObj[key].tag} class="${menuItemsObj[key].className} ${menuItemsObj[key].classMod}">${menuItemsObj[key].title}</${menuItemsObj[key].tag}>`;
 	}
-	menuItem.innerHTML = menuItemHtml;
-}
 
+	classMenu.innerHTML += menuItemsHtml;
+}

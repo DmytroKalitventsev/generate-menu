@@ -4,11 +4,12 @@
 	box-sizing: border-box;
 }
 
-ul,
-li {
+ul {
 	list-style: none;
 }
 
-.info-item_bold {
+.menu {
+	font-family: sans-serif;
 	font-weight: bold;
+	font-size: 30px;
 }
