@@ -15,39 +15,38 @@ let menuItems = [
 	{ tag: 'li', title: 'Contacts', className: 'menu-item', classMod: 'menu-item_contacts' },
 ];
 
+
+
 generateMenu('.header');
 
 function generateMenu(parentSelector) {
-	renderNav(nav, parentSelector);
-	renderMenu(menu, nav.className);
-	renderMenuItems(menuItems, menu.className);
+	let selectorHtml = doc.querySelector(parentSelector);
+
+	selectorHtml.innerHTML += renderNav(nav);
 }
 
-function renderNav(navObj, parentSelector) {
-	let selectorHtml = doc.querySelector(parentSelector);
+function renderNav(navObj) {
 	let navHtml = '';
 
-	navHtml += `<${navObj.tag} class="${navObj.className}"></${navObj.tag}}>`;
+	navHtml += `<${navObj.tag} class="${navObj.className}">${renderMenu(menu)}</${navObj.tag}}>`;
 
-	selectorHtml.innerHTML += navHtml;
+	return navHtml;
 }
 
-function renderMenu(menuObj, navClassName) {
-	let classNav = doc.querySelector(`.${navClassName}`);
+function renderMenu(menuObj) {
 	let menuListHtml = '';
 
-	menuListHtml += `<${menuObj.tag} class="${menuObj.className}"></${menuObj.tag}}>`;
+	menuListHtml += `<${menuObj.tag} class="${menuObj.className}">${renderMenuItems(menuItems)}</${menuObj.tag}}>`;
 
-	classNav.innerHTML += menuListHtml;
+	return menuListHtml;
 }
 
-function renderMenuItems(menuItemsObj, menuClassName) {
-	let classMenu = doc.querySelector(`.${menuClassName}`);
+function renderMenuItems(menuItemsObj) {
 	let menuItemsHtml = '';
 
 	for (let key in menuItemsObj) {
 		menuItemsHtml += `<${menuItemsObj[key].tag} class="${menuItemsObj[key].className} ${menuItemsObj[key].classMod}">${menuItemsObj[key].title}</${menuItemsObj[key].tag}>`;
 	}
 
-	classMenu.innerHTML += menuItemsHtml;
+	return menuItemsHtml;
 }
