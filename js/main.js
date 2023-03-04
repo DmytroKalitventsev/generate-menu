@@ -15,20 +15,18 @@ let menuItems = [
 	{ tag: 'li', title: 'Contacts', className: 'menu-item', classMod: 'menu-item_contacts' },
 ];
 
-
-
 generateMenu('.header');
 
 function generateMenu(parentSelector) {
 	let selectorHtml = doc.querySelector(parentSelector);
 
-	selectorHtml.innerHTML += renderNav(nav);
+	selectorHtml.innerHTML = renderNav(nav);
 }
 
 function renderNav(navObj) {
 	let navHtml = '';
 
-	navHtml += `<${navObj.tag} class="${navObj.className}">${renderMenu(menu)}</${navObj.tag}}>`;
+	navHtml = `<${navObj.tag} class="${navObj.className}">${renderMenu(menu)}</${navObj.tag}}>`;
 
 	return navHtml;
 }
@@ -36,7 +34,7 @@ function renderNav(navObj) {
 function renderMenu(menuObj) {
 	let menuListHtml = '';
 
-	menuListHtml += `<${menuObj.tag} class="${menuObj.className}">${renderMenuItems(menuItems)}</${menuObj.tag}}>`;
+	menuListHtml = `<${menuObj.tag} class="${menuObj.className}">${renderMenuItems(menuItems)}</${menuObj.tag}}>`;
 
 	return menuListHtml;
 }
